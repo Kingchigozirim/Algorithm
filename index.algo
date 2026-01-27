@@ -1,0 +1,31 @@
+ALGORITHM  GoMyCode checkpoint
+VAR
+    sentence: STRING
+    los, now, nov: INTEGER
+    counter: INTEGER:=0
+BEGIN
+    Read(sentence)
+    WHILE (sentence {counter} <> '.' ) DO
+        IF (sentence [counter] = ' ') THEN
+        now:=now+1
+    END_IF
+    IF (sentence [counter]='a')
+        counter:=counter+1
+    END_WHILE
+
+
+        
+        counter:=counter+1
+    END_WHILE
+    los:=counter +1
+    now:=now+1
+    write(los)
+    write(now)
+
+
+END
+
+
+"hello world."
+
+I am a long word 
