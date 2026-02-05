@@ -1,31 +1,61 @@
-ALGORITHM  GoMyCode checkpoint
-VAR
-    sentence: STRING
-    los, now, nov: INTEGER
-    counter: INTEGER:=0
-BEGIN
-    Read(sentence)
-    WHILE (sentence {counter} <> '.' ) DO
-        IF (sentence [counter] = ' ') THEN
-        now:=now+1
-    END_IF
-    IF (sentence [counter]='a')
-        counter:=counter+1
-    END_WHILE
-
-
+function analyzeSentence() {
+    // Initialize three counters
+    let charCount = 0;
+    let wordCount = 0;
+    let vowelCount = 0;
+    
+    // Define vowels
+    const vowels = "aeiouAEIOU";
+    
+    // Flag to track if we're in a word
+    let inWord = false;
+    
+    // Read the sentence
+    const sentence = prompt("Enter a sentence ending with a period:");
+    
+    // Process each character separately
+    for (let i = 0; i < sentence.length; i++) {
+        const char = sentence[i];
         
-        counter:=counter+1
-    END_WHILE
-    los:=counter +1
-    now:=now+1
-    write(los)
-    write(now)
+        // Increment character counter
+        charCount++;
+        
+        // Check if we've reached the period (end of sentence)
+        if (char === '.') {
+            // If we were in a word, count it
+            if (inWord) {
+                wordCount++;
+            }
+            break;
+        }
+        
+        // Check if character is a vowel
+        if (vowels.includes(char)) {
+            vowelCount++;
+        }
+        
+        // Count words (separated by single space)
+        if (char === ' ') {
+            if (inWord) {
+                wordCount++;
+                inWord = false;
+            }
+        } else {
+            inWord = true;
+        }
+    }
+    
+    // Display results
+    console.log(`Sentence length: ${charCount} characters`);
+    console.log(`Number of words: ${wordCount}`);
+    console.log(`Number of vowels: ${vowelCount}`);
+    
+    // Alternative: display with alert
+    alert(`Results:\n` +
+          `Sentence length: ${charCount} characters\n` +
+          `Number of words: ${wordCount}\n` +
+          `Number of vowels: ${vowelCount}`);
+}
 
-
-END
-
-
-"hello world."
-
-I am a long word 
+// Run the algorithm
+analyzeSentence();
