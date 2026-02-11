@@ -1,21 +1,28 @@
 function analyzeSentence() {
-    // Initialize three counters
-    let charCount = 0;
-    let wordCount = 0;
-    let vowelCount = 0;
+    /**
+ * Analyzes a user-entered sentence and counts:
+ * - total number of characters (including spaces and period)
+ * - number of words
+ * - number of vowels (both lowercase and uppercase)
+ * Stops processing when it encounters the first period (.)
+ */
+    let charCount = 0; // Total characters including spaces & punctuation
+    let wordCount = 0; // Number of words (separated by spaces)
+    let vowelCount = 0; // Number of vowels (a,e,i,o,u case-insensitive)
     
-    // Define vowels
-    const vowels = "aeiouAEIOU";
+    //Define what characters are considered vowels
+    const vowels = "aeiouAEIOU"; // String containing all vowel characters
     
-    // Flag to track if we're in a word
+    // State-tracking variable: are we currently inside a word? 
+    //Helps correctly count words even with multiple spaces
     let inWord = false;
     
-    // Read the sentence
+    // Read the sentence from the user
     const sentence = prompt("Enter a sentence ending with a period:");
     
     // Process each character separately
     for (let i = 0; i < sentence.length; i++) {
-        const char = sentence[i];
+        const char = sentence[i]; // Current character being examined
         
         // Increment character counter
         charCount++;
@@ -34,18 +41,25 @@ function analyzeSentence() {
             vowelCount++;
         }
         
-        // Count words (separated by single space)
+       // Word boundary detection logic
+        // We count a word when we transition from non-space → space
+        // or when we reach the end (handled above with the period)
         if (char === ' ') {
+            // We just left a word (if we were in one)
             if (inWord) {
                 wordCount++;
-                inWord = false;
+                inWord = false; // Now we're in a space / between words
             }
+            // multiple spaces are ignored (inWord stays false)
         } else {
+            // Any non-space character → we are inside a word
             inWord = true;
         }
     }
     
-    // Display results
+    //Output the results in two ways:
+    //  - to browser console (good for debugging)
+    //  - to user via alert dialog
     console.log(`Sentence length: ${charCount} characters`);
     console.log(`Number of words: ${wordCount}`);
     console.log(`Number of vowels: ${vowelCount}`);
